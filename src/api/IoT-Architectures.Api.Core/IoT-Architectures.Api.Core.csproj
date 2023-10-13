@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\IoT-Architectures.Api.Domain\IoT-Architectures.Api.Domain.csproj" />
+      <ProjectReference Include="..\IoT-Architectures.Client.Persistence.Mongodb\IoT-Architectures.Client.Persistence.Mongodb.csproj" />
     </ItemGroup>
 
 </Project>
