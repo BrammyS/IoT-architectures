@@ -1,6 +1,6 @@
 # Secrets
 
-This file contains the command needed to set all the secrets required to run Color-Chan.
+This file contains the command needed to set all the secrets required to run IoT.Architectures.Api.
 Execute the commands in the root of the repository.
 
 ### Command
