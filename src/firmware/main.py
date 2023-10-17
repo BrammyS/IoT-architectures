@@ -1,11 +1,12 @@
 from network import LoRa
 from lib.cbor import dumps_array
-
 import env, time, pycom
 import socket, ubinascii
+from machine import I2C
 
-pycom.rgbled(0x7f0000)
-time.sleep(1)
+# STARTING_TEMPERATURE = urandom.randint(5, 25)
+GEO_LOCATION = "GeoLocation"
+TEMPERATURE = "Temperature"
 
 lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
 print(ubinascii.hexlify(lora.mac()).upper().decode('utf-8'))
@@ -21,7 +22,6 @@ while not lora.has_joined():
     time.sleep(2.5)
     print('Not yet joined...')
 
-pycom.rgbled(0x007f00)
 print('Joined!')
 
 # Create a LoRa socket
@@ -33,10 +33,13 @@ s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
 # Make the socket non-blocking
 s.setblocking(False)
 
+def generate_senML(geo_location_value, temperature_value):
+    return dumps_array([{}, {"n": GEO_LOCATION,"v": geo_location_value}, {"n": TEMPERATURE,"v": temperature_value}])
+
 # Define a function to send SenML data
 def send_data():
     s.setblocking(True)
-    s.send(dumps_array([{}, {"n": "Je Moeder stinks","v": 420}, {"n": "Je Vader stinks","vs": "Hello world bitch!!!!"}]))
+    s.send(generate_senML(420, 10))
     s.setblocking(False)
 
 # Example of generating and sending fake sensor data
