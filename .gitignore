@@ -244,4 +244,4 @@ _Pvt_Extensions
 /CleanArchitecture.ndproj
 update.bat
 
-**/.env
+**/env.py
