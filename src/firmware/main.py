@@ -19,6 +19,7 @@ while not lora.has_joined():
     time.sleep(2.5)
     print('Not yet joined...')
 
+pycom.rgbled(0x007f00)
 print('Joined!')
 
 # Create a LoRa socket
@@ -31,12 +32,10 @@ s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
 s.setblocking(False)
 
 # Define a function to send SenML data
-def send_data(data):
+def send_data():
     s.setblocking(True)
-    s.send(data)
+    s.send("81836461616161636c6174fb4049fa364388ebcc".encode('utf-8'))
     s.setblocking(False)
 
 # Example of generating and sending fake sensor data
-while True:
-    send_data("86836461616161636c6174fb4049fa364388ebcc8366626262626262636c6f6efb401b003ff69014b68366636363636363616dfb409cbe261fe21d9783656464646464612519270f8366656565656565612519270fa2006766666666666666036d31363937353537323133353436")
-    time.sleep(60)  # Adjust the interval as needed
+send_data()
