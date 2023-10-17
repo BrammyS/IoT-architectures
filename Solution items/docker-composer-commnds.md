@@ -15,5 +15,11 @@ docker compose build
 ## Build Api
 
 ```bash
-docker compose build color-chan-api
+docker compose build iot-architectures-api
+```
+
+## Build Client
+
+```bash
+docker compose build iot-architectures-client
 ```
