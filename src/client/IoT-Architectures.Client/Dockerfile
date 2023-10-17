@@ -6,6 +6,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["src/client/IoT-Architectures.Client/IoT-Architectures.Client.csproj", "src/client/IoT-Architectures.Client/"]
+COPY ["src/client/IoT-Architectures.Client.Core/IoT-Architectures.Client.Core.csproj", "src/client/IoT-Architectures.Client.Core/"]
+COPY ["src/client/IoT-Architectures.Client.Domain/IoT-Architectures.Client.Domain.csproj", "src/client/IoT-Architectures.Client.Domain/"]
 RUN dotnet restore "src/client/IoT-Architectures.Client/IoT-Architectures.Client.csproj"
 COPY . .
 WORKDIR "/src/src/client/IoT-Architectures.Client"

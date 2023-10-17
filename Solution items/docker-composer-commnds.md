@@ -17,9 +17,3 @@ docker compose build
 ```bash
 docker compose build iot-architectures-api
 ```
-
-## Build Client
-
-```bash
-docker compose build iot-architectures-client
-```
