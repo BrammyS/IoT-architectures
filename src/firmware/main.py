@@ -1,4 +1,6 @@
 from network import LoRa
+from lib.cbor import dumps_array
+
 import env, time, pycom
 import socket, ubinascii
 
@@ -34,7 +36,7 @@ s.setblocking(False)
 # Define a function to send SenML data
 def send_data():
     s.setblocking(True)
-    s.send("81836461616161636c6174fb4049fa364388ebcc".encode('utf-8'))
+    s.send(dumps_array([{}, {"n": "Je Moeder stinks","v": 420}, {"n": "Je Vader stinks","vs": "Hello world bitch!!!!"}]))
     s.setblocking(False)
 
 # Example of generating and sending fake sensor data
