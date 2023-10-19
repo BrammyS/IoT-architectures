@@ -9,13 +9,26 @@ from machine import RTC
 from machine import SD
 from lib.pytrack.L76GNSS import L76GNSS
 from lib.pytrack.pycoproc_1 import Pycoproc
+from network import WLAN
+
+pycom.rgbled(0x7f0000) # red
+time.sleep(1)
 
 # STARTING_TEMPERATURE = urandom.randint(5, 25)
-GEO_LOCATION = "GeoLocation"
+LATITUDE = "lat"
+LONGITUDE = "lon"
 TEMPERATURE = "Temperature"
 
 time.sleep(2)
 gc.enable()
+
+# Setup Wi-Fi
+wlan = WLAN(mode=WLAN.STA)
+wlan.connect(ssid='xxxxxxxx', auth=(WLAN.WPA2, 'xxxxxxxx'))
+while not wlan.isconnected():
+    machine.idle()
+print("WiFi connected succesfully")
+print(wlan.ifconfig())
 
 # setup rtc
 rtc = machine.RTC()
@@ -24,6 +37,9 @@ utime.sleep_ms(750)
 print('\nRTC Set from NTP to UTC:', rtc.now())
 utime.timezone(7200)
 print('Adjusted from UTC to EST timezone', utime.localtime(), '\n')
+
+pycom.rgbled(0x7f7f00) # yellow
+time.sleep(1)
 
 py = Pycoproc(Pycoproc.PYTRACK)
 l76 = L76GNSS(py, timeout=30)
@@ -53,8 +69,8 @@ s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
 # Make the socket non-blocking
 s.setblocking(False)
 
-def generate_senML(geo_location_value, temperature_value):
-    return dumps_array([{}, {"n": GEO_LOCATION,"v": geo_location_value}, {"n": TEMPERATURE,"v": temperature_value}])
+def generate_senML(lat, lon):
+    return dumps_array([{}, {"n": LATITUDE,"v": lat}, {"n": LONGITUDE,"v": lon}])
 
 # Define a function to send SenML data
 def send_data(senML):
@@ -68,8 +84,10 @@ max_reqs=200
 while reqs <= max_reqs:
     (lat, lon) = l76.coordinates(debug=True)
     print("{} --- {},{} - {} - {}".format(reqs, lat, lon, rtc.now(), gc.mem_free()))
-    if lat is not None: 
+    if lat is not None:
+        pycom.rgbled(0x007f00) # green
         send_data(generate_senML(lat, lon))
-        break
+    else:
+        pycom.rgbled(0x00007f) # blue
     time.sleep(10)
     reqs += 1
