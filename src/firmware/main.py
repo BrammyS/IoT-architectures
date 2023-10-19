@@ -2,11 +2,31 @@ from network import LoRa
 from lib.cbor import dumps_array
 import env, time, pycom
 import socket, ubinascii
-from machine import I2C
+import gc
+import utime
+import machine
+from machine import RTC
+from machine import SD
+from lib.pytrack.L76GNSS import L76GNSS
+from lib.pytrack.pycoproc_1 import Pycoproc
 
 # STARTING_TEMPERATURE = urandom.randint(5, 25)
 GEO_LOCATION = "GeoLocation"
 TEMPERATURE = "Temperature"
+
+time.sleep(2)
+gc.enable()
+
+# setup rtc
+rtc = machine.RTC()
+rtc.ntp_sync("pool.ntp.org")
+utime.sleep_ms(750)
+print('\nRTC Set from NTP to UTC:', rtc.now())
+utime.timezone(7200)
+print('Adjusted from UTC to EST timezone', utime.localtime(), '\n')
+
+py = Pycoproc(Pycoproc.PYTRACK)
+l76 = L76GNSS(py, timeout=30)
 
 lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
 print(ubinascii.hexlify(lora.mac()).upper().decode('utf-8'))
@@ -37,10 +57,19 @@ def generate_senML(geo_location_value, temperature_value):
     return dumps_array([{}, {"n": GEO_LOCATION,"v": geo_location_value}, {"n": TEMPERATURE,"v": temperature_value}])
 
 # Define a function to send SenML data
-def send_data():
+def send_data(senML):
     s.setblocking(True)
-    s.send(generate_senML(420, 10))
+    s.send(senML)
     s.setblocking(False)
 
 # Example of generating and sending fake sensor data
-send_data()
+reqs = 0
+max_reqs=200
+while reqs <= max_reqs:
+    (lat, lon) = l76.coordinates(debug=True)
+    print("{} --- {},{} - {} - {}".format(reqs, lat, lon, rtc.now(), gc.mem_free()))
+    if lat is not None: 
+        send_data(generate_senML(lat, lon))
+        break
+    time.sleep(10)
+    reqs += 1
