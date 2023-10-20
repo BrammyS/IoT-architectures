@@ -8,12 +8,13 @@
 <button @onclick="AddMarker">Add marker</button>
 <button @onclick="RemoveMarker">Remove marker</button>
 <button @onclick="Recenter">Re-center marker</button>
-@if(_markers.Any())
+@if (_markers.Any())
 {
-<br/><text>Label: </text><input type="text" value="@_labelText" @onchange="UpdateLabelText" />
-<br />
+    <br/>
+    <text>Label: </text>
+    <input type="text" value="@_labelText" @onchange="UpdateLabelText"/>
+    <br/>
 }
-
 
 @functions {
     private GoogleMap _map1 = default!;
@@ -43,7 +44,7 @@
                 Position = await _map1.InteropObject.GetCenter(),
                 Map = _map1.InteropObject,
                 Label = new MarkerLabel { Text = $"Test {_markers.Count}", FontWeight = "bold" },
-                Draggable=true,
+                Draggable = true,
                 Icon = new Icon
                 {
                     Url = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
@@ -54,7 +55,7 @@
                 Position = await _map1.InteropObject.GetCenter(),
                 Map = _map1.InteropObject,
                 Label = $"Test {_markers.Count}",
-                Draggable=true,
+                Draggable = true,
                 Icon = new Icon
                 {
                     Url = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
