@@ -3,6 +3,9 @@ import gc
 from lib.pytrack.L76GNSS import L76GNSS
 from lib.pytrack.pycoproc_1 import Pycoproc
 from helpers import *
+import pycom
+
+pycom.heartbeat(False)
 
 change_led(0x7f0000) # red
 

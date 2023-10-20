@@ -65,8 +65,8 @@ def create_lora_socket(debug=False):
     return s
 
 def update_status_led(was_last_lora_send_success, has_gps):
-    color = int("0x00{}{}".format("7f" if was_last_lora_send_success else "00", "7f" if has_gps else "00"))
+    color = int("0x{}{}{}".format("ff" if was_last_lora_send_success and has_gps else "00", "ff" if was_last_lora_send_success else "00", "ff" if has_gps else "00"))
     change_led(color)
 
 def generate_random_temperature():
-    return STARTING_TEMPERATURE - __generate_random_number(5)
+    return int(STARTING_TEMPERATURE - (__generate_random_number(5) / 2))
