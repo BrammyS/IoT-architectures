@@ -1,63 +1,42 @@
-import env, time, pycom
-import socket
+import time
 import gc
-import machine
 from lib.pytrack.L76GNSS import L76GNSS
 from lib.pytrack.pycoproc_1 import Pycoproc
 from helpers import *
 
 change_led(0x7f0000) # red
-time.sleep(1)
-
-# STARTING_TEMPERATURE = urandom.randint(5, 25)
 
 time.sleep(2)
 gc.enable()
 
-# setup rtc
-setup_rtc_time()
-
-if env.SHOW_LED_STATUS:
-    pycom.rgbled(0x7f7f00) # yellow
+change_led(0x7f7f00) # yellow
 time.sleep(1)
 
 py = Pycoproc(Pycoproc.PYTRACK)
 l76 = L76GNSS(py, timeout=30)
 
-# setup lora
-lora = setup_lora()
-
-# Loop until joined
-while not lora.has_joined():
-    time.sleep(2.5)
-    print('Not yet joined...')
-
-print('Joined!')
-
-# Create a LoRa socket
-s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
-
-# Set the LoRaWAN data rate
-s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
-
-# Make the socket non-blocking
-s.setblocking(False)
+s = create_lora_socket()
 
 # Define a function to send SenML data
 def send_data(senML):
     s.setblocking(True)
-    s.send(senML)
+    try:
+        s.send(senML)
+    except:
+        return False # we lost the connection :(
     s.setblocking(False)
+    return True
 
-reqs = 0
-max_reqs=200
-while reqs <= max_reqs:
+wasLastSendSuccessFull = True
+while True:
     (lat, lon) = l76.coordinates(debug=True)
+
+    update_status_led(wasLastSendSuccessFull, lat is not None and lon is not None)
+
     if lat is not None:
-        change_led(0x007f00) # green
-        send_data(generate_senML(lat, lon))
+        wasLastSendSuccessFull = send_data(generate_senML(lat, lon))
+        if not wasLastSendSuccessFull:
+            s = create_lora_socket()
         time.sleep(50)
-    else:
-        change_led(0x00007f) # blue
+
     time.sleep(10)
-    reqs += 1
