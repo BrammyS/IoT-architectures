@@ -28,11 +28,17 @@ public static class ConfigurationsExtensions
         return GetKey(configuration, key);
     }
 
+    public static bool? GetMongodbIsAtlas(this IConfiguration configuration)
+    {
+        const string key = "Mongodb:IsAtlas";
+        return bool.TryParse(GetKey(configuration, key), out var isMongodbAtlas) ? isMongodbAtlas : null;
+    }
+
     private static string GetAndValidateKey(IConfiguration configuration, string key)
     {
         return GetKey(configuration, key) ?? throw new ArgumentNullException(key, $"{key} is not set in the configuration file.");
     }
-    
+
     private static string? GetKey(IConfiguration configuration, string key)
     {
         return configuration[key];

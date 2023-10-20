@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="Scrutor" Version="4.2.2" />
-        <PackageReference Include="FluentValidation" Version="11.7.1"/>
+        <PackageReference Include="FluentValidation" Version="11.8.0" />
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
         <PackageReference Include="Mediator.Abstractions" Version="2.1.7"/>
