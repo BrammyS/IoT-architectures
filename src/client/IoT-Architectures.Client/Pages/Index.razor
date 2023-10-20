@@ -14,16 +14,16 @@
 
     private MapOptions mapOptions;
 
-    private Stack<Marker> markers = new Stack<Marker>();
+    private Stack<Marker> markers = new();
 
-    private List<String> _events = new List<String>();
+    private List<string> _events = new();
 
     protected override void OnInitialized()
     {
-        mapOptions = new MapOptions()
+        mapOptions = new MapOptions
         {
             Zoom = 13,
-            Center = new LatLngLiteral()
+            Center = new LatLngLiteral
             {
                 Lat = 13.505892,
                 Lng = 100.8162
@@ -34,22 +34,17 @@
 
     private async Task AddMarker()
     {
-        var marker = await Marker.CreateAsync(map1.JsRuntime, new MarkerOptions()
+        var marker = await Marker.CreateAsync(map1.JsRuntime, new MarkerOptions
         {
             Position = await map1.InteropObject.GetCenter(),
             Map = map1.InteropObject,
-            Label = $"Test {markers.Count()}",
-            Icon = new Icon()
+            Label = $"Test {markers.Count}",
+            Icon = new Icon
             {
                 Url = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
             }
-            //Icon = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
         });
-
-        //await marker.SetMap(map1);
-
-        //var map = await marker.GetMap();
-
+        
         var icon = await marker.GetIcon();
 
         Console.WriteLine($"Get icon result type is : {icon.Value.GetType()}");
@@ -59,25 +54,14 @@
             i => Console.WriteLine(i.Url),
             _ => { });
 
-        //if (map == map1.InteropObject)
-        //{
-        //    Console.WriteLine("Yess");
-        //}
-        //else
-        //{
-        //    Console.WriteLine("Nooo");
-        //}
-
         markers.Push(marker);
 
-        await marker.AddListener<MouseEvent>("click", async e =>
+        void Handler(MouseEvent e)
         {
-            var markerLabel = await marker.GetLabel();
-            _events.Add("click on " + markerLabel);
-            StateHasChanged();
+            Console.WriteLine("test");
+        }
 
-            e.Stop();
-        });
+        await marker.AddListener<MouseEvent>("click", Handler);
     }
 
     private async Task RemoveMarker()
