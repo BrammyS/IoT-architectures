@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7CE6197A-C0F2-4F39-AE4A-A4AC564F009D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5A6E7DF4-EC5D-4680-9892-C430ED17E9FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "client", "client", "{DE597BE9-5EFE-4BE1-A6EA-EEE03AB981C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{9B87C53C-F640-48A6-8614-FCEEED0503BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT-Architectures.Api", "src\api\IoT-Architectures.Api\IoT-Architectures.Api.csproj", "{EC84D1EC-12B3-4BA0-BE26-00F1DF7F48F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT-Architectures.Api.Core", "src\api\IoT-Architectures.Api.Core\IoT-Architectures.Api.Core.csproj", "{31BEEE3F-9306-4647-8F0B-6CBD9B9CD358}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT-Architectures.Api.Domain", "src\api\IoT-Architectures.Api.Domain\IoT-Architectures.Api.Domain.csproj", "{65D0D108-F7BB-4928-8A60-31E4D439D349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT-Architectures.Client.Core", "src\client\IoT-Architectures.Client.Core\IoT-Architectures.Client.Core.csproj", "{A98F1FAA-773D-4019-853C-0699BD9ABDE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT-Architectures.Client.Domain", "src\client\IoT-Architectures.Client.Domain\IoT-Architectures.Client.Domain.csproj", "{67C4F329-6A84-4DAB-B9C7-216A0964F2C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT-Architectures.Client.Persistence", "src\api\IoT-Architectures.Client.Persistence\IoT-Architectures.Client.Persistence.csproj", "{A68976E4-764E-47BF-862F-C2EC29EAFFED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT-Architectures.Client.Persistence.Mongodb", "src\api\IoT-Architectures.Client.Persistence.Mongodb\IoT-Architectures.Client.Persistence.Mongodb.csproj", "{01FF8B54-2CE5-4866-B3D4-A5F12C3056CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{EF6E6CBF-1566-4259-A06C-AE2BE0A68B24}"
+	ProjectSection(SolutionItems) = preProject
+		Solution items\Secrets.md = Solution items\Secrets.md
+		Solution items\docker-compose.yaml = Solution items\docker-compose.yaml
+		Solution items\docker-composer-commnds.md = Solution items\docker-composer-commnds.md
+		Solution items\template.docker-compose.yaml = Solution items\template.docker-compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT-Architectures.Client", "src\client\IoT-Architectures.Client\IoT-Architectures.Client.csproj", "{E5002A79-7ECC-4545-8F80-15460A7EBE34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC84D1EC-12B3-4BA0-BE26-00F1DF7F48F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC84D1EC-12B3-4BA0-BE26-00F1DF7F48F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC84D1EC-12B3-4BA0-BE26-00F1DF7F48F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC84D1EC-12B3-4BA0-BE26-00F1DF7F48F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31BEEE3F-9306-4647-8F0B-6CBD9B9CD358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31BEEE3F-9306-4647-8F0B-6CBD9B9CD358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31BEEE3F-9306-4647-8F0B-6CBD9B9CD358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31BEEE3F-9306-4647-8F0B-6CBD9B9CD358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65D0D108-F7BB-4928-8A60-31E4D439D349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D0D108-F7BB-4928-8A60-31E4D439D349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D0D108-F7BB-4928-8A60-31E4D439D349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D0D108-F7BB-4928-8A60-31E4D439D349}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A98F1FAA-773D-4019-853C-0699BD9ABDE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A98F1FAA-773D-4019-853C-0699BD9ABDE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A98F1FAA-773D-4019-853C-0699BD9ABDE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A98F1FAA-773D-4019-853C-0699BD9ABDE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67C4F329-6A84-4DAB-B9C7-216A0964F2C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C4F329-6A84-4DAB-B9C7-216A0964F2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C4F329-6A84-4DAB-B9C7-216A0964F2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C4F329-6A84-4DAB-B9C7-216A0964F2C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68976E4-764E-47BF-862F-C2EC29EAFFED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68976E4-764E-47BF-862F-C2EC29EAFFED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68976E4-764E-47BF-862F-C2EC29EAFFED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68976E4-764E-47BF-862F-C2EC29EAFFED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01FF8B54-2CE5-4866-B3D4-A5F12C3056CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01FF8B54-2CE5-4866-B3D4-A5F12C3056CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01FF8B54-2CE5-4866-B3D4-A5F12C3056CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01FF8B54-2CE5-4866-B3D4-A5F12C3056CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5002A79-7ECC-4545-8F80-15460A7EBE34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5002A79-7ECC-4545-8F80-15460A7EBE34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5002A79-7ECC-4545-8F80-15460A7EBE34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5002A79-7ECC-4545-8F80-15460A7EBE34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DE597BE9-5EFE-4BE1-A6EA-EEE03AB981C6} = {7CE6197A-C0F2-4F39-AE4A-A4AC564F009D}
+		{9B87C53C-F640-48A6-8614-FCEEED0503BB} = {7CE6197A-C0F2-4F39-AE4A-A4AC564F009D}
+		{EC84D1EC-12B3-4BA0-BE26-00F1DF7F48F4} = {9B87C53C-F640-48A6-8614-FCEEED0503BB}
+		{31BEEE3F-9306-4647-8F0B-6CBD9B9CD358} = {9B87C53C-F640-48A6-8614-FCEEED0503BB}
+		{65D0D108-F7BB-4928-8A60-31E4D439D349} = {9B87C53C-F640-48A6-8614-FCEEED0503BB}
+		{A98F1FAA-773D-4019-853C-0699BD9ABDE7} = {DE597BE9-5EFE-4BE1-A6EA-EEE03AB981C6}
+		{67C4F329-6A84-4DAB-B9C7-216A0964F2C6} = {DE597BE9-5EFE-4BE1-A6EA-EEE03AB981C6}
+		{A68976E4-764E-47BF-862F-C2EC29EAFFED} = {9B87C53C-F640-48A6-8614-FCEEED0503BB}
+		{01FF8B54-2CE5-4866-B3D4-A5F12C3056CB} = {9B87C53C-F640-48A6-8614-FCEEED0503BB}
+		{E5002A79-7ECC-4545-8F80-15460A7EBE34} = {DE597BE9-5EFE-4BE1-A6EA-EEE03AB981C6}
+	EndGlobalSection
+EndGlobal

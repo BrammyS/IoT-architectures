@@ -243,5 +243,6 @@ _Pvt_Extensions
 /NDependOut
 /CleanArchitecture.ndproj
 update.bat
+Solution items/docker-compose.yaml
 
-**/env.py
+src/firmware/env.py
