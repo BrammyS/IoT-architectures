@@ -18,4 +18,5 @@
         <ProjectReference Include="..\IoT-Architectures.Client.Persistence\IoT-Architectures.Client.Persistence.csproj"/>
     </ItemGroup>
 
+
 </Project>
