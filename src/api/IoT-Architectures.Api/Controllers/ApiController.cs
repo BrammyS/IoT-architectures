@@ -7,7 +7,7 @@ namespace IoT_Architectures.Api.Controllers;
 /// <summary>
 ///     The Base for all API controllers.
 /// </summary>
-[Authorize]
+// [Authorize]
 [ApiController]
 [ApiVersion("1")]
 [Route("api/v{apiVersion}/[controller]")]

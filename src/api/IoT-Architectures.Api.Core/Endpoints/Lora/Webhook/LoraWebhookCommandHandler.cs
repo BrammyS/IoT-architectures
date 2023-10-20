@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using IoT_Architectures.Api.Core.Endpoints.Lora.Webhook.Temperature;
+using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords;
 using Mediator;
 using Microsoft.Extensions.Logging;
 
@@ -40,7 +40,7 @@ public class LoraWebhookCommandHandler : IRequestHandler<LoraWebhookCommand>
         );
 
         // Todo: Check if its a temperature reading
-        var temperatureCommand = new LoraTemperatureReadingCommand(
+        var temperatureCommand = new CreateTemperatureRecordCommand(
             request.Data.First(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name == "lat").Number!.Value,
             request.Data.First(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name == "lon").Number!.Value,
             420,
