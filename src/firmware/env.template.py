@@ -1,6 +1,4 @@
 DEV_EUI = ""
 APP_EUI = ""
 APP_KEY = ""
-WIFI_SSID = ""
-WIFI_PASSWORD = ""
 SHOW_LED_STATUS = False
