@@ -56,6 +56,7 @@ while reqs <= max_reqs:
     if lat is not None:
         change_led(0x007f00) # green
         send_data(generate_senML(lat, lon))
+        time.sleep(50)
     else:
         change_led(0x00007f) # blue
     time.sleep(10)
