@@ -8,9 +8,6 @@ import socket, ubinascii
 from network import LoRa
 from time import sleep
 
-def __generate_random_number(max_value):
-    return __generate_random_number(0, max_value)
-
 def __generate_random_number(min_value, max_value):
     random_int = rng() & 0x7FFFFFFF  # Ensure it's a positive integer
     range_size = max_value - min_value + 1
@@ -73,4 +70,4 @@ def update_status_led(was_last_lora_send_success, has_gps):
     change_led(color)
 
 def generate_random_temperature():
-    return int(STARTING_TEMPERATURE - (__generate_random_number(5) / 2))
+    return int(STARTING_TEMPERATURE - (__generate_random_number(0, 5) / 2))
