@@ -40,14 +40,16 @@ public class LoraWebhookCommandHandler : IRequestHandler<LoraWebhookCommand>
             request.Data.Count(x => x.IsRecord())
         );
 
-        // Todo: Check if its a temperature reading
-        var temperatureCommand = new CreateTemperatureRecordCommand(
-            request.Data.First(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name == "lat").Number!.Value,
-            request.Data.First(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name == "lon").Number!.Value,
-            420,
-            request.Data.First(x => x.BaseTime != null).BaseTime!.Value
-        );
-        await _mediator.Send(temperatureCommand, cancellationToken).ConfigureAwait(false);
+        if(request.Data.Any(x => x.Name == "Temperature"))
+        {
+            var temperatureCommand = new CreateTemperatureRecordCommand(
+                request.Data.First(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name == "lat").Number!.Value,
+                request.Data.First(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name == "lon").Number!.Value,
+                request.Data.First(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name == "Temperature").Number!.Value,
+                request.Data.First(x => x.BaseTime != null).BaseTime!.Value
+            );
+            await _mediator.Send(temperatureCommand, cancellationToken).ConfigureAwait(false);
+        }
 
         return Unit.Value;
     }
