@@ -40,6 +40,6 @@ while True:
         wasLastSendSuccessFull = send_data(generate_senML(lat, lon))
         if not wasLastSendSuccessFull:
             s = create_lora_socket()
-        time.sleep(110)
+        time.sleep(290)
 
     time.sleep(10)
