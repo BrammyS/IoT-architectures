@@ -1,5 +1,7 @@
 ﻿using IoT_Architectures.Client.Persistence.Mongodb.Configurations;
+using IoT_Architectures.Client.Persistence.Mongodb.Repositories;
 using IoT_Architectures.Client.Persistence.Mongodb.UnitOfWorks;
+using IoT_Architectures.Client.Persistence.Repositories;
 using IoT_Architectures.Client.Persistence.UnitOfWorks;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +13,8 @@ public static class DependencyInjection
     {
         services.AddSingleton<MongoContext>();
         services.AddSingleton<IUnitOfWork, UnitOfWork>();
-
+        services.AddSingleton<ITemperatureRecordRepository, TemperatureRecordRepository>();
+        
         services.Scan(
             scan => scan
                 .FromAssemblyOf<ICollectionConfigurator>()

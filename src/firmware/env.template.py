@@ -1,0 +1,4 @@
+DEV_EUI = ""
+APP_EUI = ""
+APP_KEY = ""
+SHOW_LED_STATUS = False

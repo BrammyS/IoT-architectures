@@ -25,6 +25,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{EF6E6CBF-1566-4259-A06C-AE2BE0A68B24}"
 	ProjectSection(SolutionItems) = preProject
 		Solution items\Secrets.md = Solution items\Secrets.md
+		Solution items\docker-compose.yaml = Solution items\docker-compose.yaml
+		Solution items\docker-composer-commnds.md = Solution items\docker-composer-commnds.md
+		Solution items\template.docker-compose.yaml = Solution items\template.docker-compose.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT-Architectures.Client", "src\client\IoT-Architectures.Client\IoT-Architectures.Client.csproj", "{E5002A79-7ECC-4545-8F80-15460A7EBE34}"
