@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords;
+using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.Create;
 using Mediator;
 using Microsoft.Extensions.Logging;
 

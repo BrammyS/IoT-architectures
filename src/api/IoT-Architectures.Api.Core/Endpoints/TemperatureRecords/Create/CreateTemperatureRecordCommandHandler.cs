@@ -3,7 +3,7 @@ using IoT_Architectures.Client.Persistence.UnitOfWorks;
 using Mediator;
 using Microsoft.Extensions.Logging;
 
-namespace IoT_Architectures.Api.Core.Endpoints.TemperatureRecords;
+namespace IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.Create;
 
 public class CreateTemperatureRecordCommandHandler : IRequestHandler<CreateTemperatureRecordCommand>
 {
