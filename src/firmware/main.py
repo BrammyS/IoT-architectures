@@ -6,15 +6,9 @@ from helpers import *
 import pycom
 
 pycom.heartbeat(False)
+change_led(0x7f00ff) # purple
 
-change_led(0x7f0000) # red
-
-time.sleep(2)
 gc.enable()
-
-change_led(0x7f7f00) # yellow
-time.sleep(1)
-
 py = Pycoproc(Pycoproc.PYTRACK)
 l76 = L76GNSS(py, timeout=30)
 
@@ -22,12 +16,13 @@ s = create_lora_socket()
 
 # Define a function to send SenML data
 def send_data(senML):
-    s.setblocking(True)
     try:
+        s.setblocking(True)
         s.send(senML)
     except:
         return False # we lost the connection :(
-    s.setblocking(False)
+    finally:
+        s.setblocking(False)
     return True
 
 wasLastSendSuccessFull = True
@@ -40,6 +35,6 @@ while True:
         wasLastSendSuccessFull = send_data(generate_senML(lat, lon))
         if not wasLastSendSuccessFull:
             s = create_lora_socket()
-        time.sleep(110)
+        time.sleep(290)
 
     time.sleep(10)
