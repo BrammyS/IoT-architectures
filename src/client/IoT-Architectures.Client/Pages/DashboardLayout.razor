@@ -19,7 +19,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/">
             <i class="fa-solid fa-gauge-simple-high"></i>
             <span>Dashboard</span></a>
         </li>
@@ -28,10 +28,11 @@
         <hr class="sidebar-divider">
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
+
+        <li class="nav-item active">
+            <a class="nav-link" href="/charts">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Charts</span></a>
         </li>
 
         <!-- Divider -->
@@ -54,10 +55,11 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <footer class="sticky-footer bg-white">
+        <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2023</span>
+                    <span>Created by Bram, Tim & Nancy - </span>
+                    <span>Copyright &copy; @_currentYear.ToString()</span>
                 </div>
             </div>
         </footer>
@@ -75,5 +77,5 @@
 </a>
 
 @code {
-
+    private int _currentYear = DateTime.Now.Year;
 }

@@ -1,8 +1,13 @@
 :root {
-    --primary: rgb(15,42,67);
+    --primary: hsl(233, 7%, 70%);
+    --primary-gradient: linear-gradient(180deg, hsl(233, 7%, 60%) 0%, hsl(233, 7%, 70%) 30%, hsl(233, 7%, 75%) 61%);
 }
 
 .bg-gradient-primary {
     background-color: var(--primary);
-    background-image: none;
+    background-image: var(--primary-gradient);
+}
+
+.bg-primary {
+    background-color: var(--primary) !important;
 }
