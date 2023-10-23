@@ -1,4 +1,7 @@
 ﻿using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords;
+using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.Create;
+using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.GetAll;
+using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.GetGrouped;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +24,13 @@ public class TemperatureRecordsController : ApiController
     public async Task<IActionResult> CreateTemperatureRecord([FromBody] CreateTemperatureRecordCommand command)
     {
         var result = await Mediator.Send(command).ConfigureAwait(false);
+        return Ok(result);
+    }
+
+    [HttpGet("grouped")]
+    public async Task<IActionResult> GetGroupedTemperatureRecords([FromQuery] DateTimeOffset date, [FromQuery] int hours)
+    {
+        var result = await Mediator.Send(new GetGroupedTemperatureRecordsQuery(date, hours)).ConfigureAwait(false);
         return Ok(result);
     }
 }
