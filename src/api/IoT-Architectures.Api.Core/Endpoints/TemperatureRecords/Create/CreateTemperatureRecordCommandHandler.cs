@@ -28,10 +28,7 @@ public class CreateTemperatureRecordCommandHandler : IRequestHandler<CreateTempe
         };
 
         await _unitOfWork.TemperatureRecords.AddAsync(reading).ConfigureAwait(false);
-        if (_logger.IsEnabled(LogLevel.Debug))
-        {
-            _logger.LogInformation("Temperature reading ({TemperatureRecord}) saved to database", reading.ToString());
-        }
+        if (_logger.IsEnabled(LogLevel.Debug)) _logger.LogInformation("Temperature reading ({TemperatureRecord}) saved to database", reading.ToString());
 
         return Unit.Value;
     }

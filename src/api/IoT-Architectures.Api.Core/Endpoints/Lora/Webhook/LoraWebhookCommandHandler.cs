@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords;
 using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.Create;
 using Mediator;
 using Microsoft.Extensions.Logging;
@@ -20,7 +19,6 @@ public class LoraWebhookCommandHandler : IRequestHandler<LoraWebhookCommand>
     public async ValueTask<Unit> Handle(LoraWebhookCommand request, CancellationToken cancellationToken)
     {
         if (_logger.IsEnabled(LogLevel.Debug))
-        {
             _logger.LogDebug(
                 "LoRa SenML data packet received: {Data}",
                 JsonSerializer.Serialize(
@@ -31,7 +29,6 @@ public class LoraWebhookCommandHandler : IRequestHandler<LoraWebhookCommand>
                     }
                 )
             );
-        }
 
         _logger.LogInformation(
             "Received a lora webhook request with {Count} data points, {PackCount} packs, {RecordCount} records",
@@ -40,7 +37,7 @@ public class LoraWebhookCommandHandler : IRequestHandler<LoraWebhookCommand>
             request.Data.Count(x => x.IsRecord())
         );
 
-        if(request.Data.Any(x => x.Name == "Temperature"))
+        if (request.Data.Any(x => x.Name == "Temperature"))
         {
             var temperatureCommand = new CreateTemperatureRecordCommand(
                 request.Data.First(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name == "lat").Number!.Value,

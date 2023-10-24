@@ -19,10 +19,7 @@ public class GetGroupedTemperatureRecordsQueryHandler : IRequestHandler<GetGroup
 
     public async ValueTask<IEnumerable<GroupedTemperatureRecordResponse>> Handle(GetGroupedTemperatureRecordsQuery request, CancellationToken cancellationToken)
     {
-        if (_logger.IsEnabled(LogLevel.Debug))
-        {
-            _logger.LogDebug("Loading all temperature records from database grouped by location");
-        }
+        if (_logger.IsEnabled(LogLevel.Debug)) _logger.LogDebug("Loading all temperature records from database grouped by location");
 
         var hours = (double)request.Hours / 2;
         var temperatureRecords = await _unitOfWork.TemperatureRecords

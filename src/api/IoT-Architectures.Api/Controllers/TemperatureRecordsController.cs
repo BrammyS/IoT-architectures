@@ -1,5 +1,4 @@
-﻿using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords;
-using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.Create;
+﻿using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.Create;
 using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.GetAll;
 using IoT_Architectures.Api.Core.Endpoints.TemperatureRecords.GetGrouped;
 using Mediator;
@@ -12,14 +11,14 @@ public class TemperatureRecordsController : ApiController
     public TemperatureRecordsController(IMediator mediator) : base(mediator)
     {
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetTemperatureRecords()
     {
         var result = await Mediator.Send(new GetTemperatureRecordsQuery()).ConfigureAwait(false);
         return Ok(result);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateTemperatureRecord([FromBody] CreateTemperatureRecordCommand command)
     {
