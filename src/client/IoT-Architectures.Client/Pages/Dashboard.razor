@@ -1,37 +1,56 @@
-@page "/dashboard"
+@page "/"
 @layout DashboardLayout
-@using GoogleMapsComponents
-@using GoogleMapsComponents.Maps
+@inject IJSRuntime JS
 
 <PageHeader Text="Dashboard" />
 
-
-<!-- Content Row -->
 <div class="row">
     <DashboardCard Title="Temperature World Map" BootstrapSizing="col-xl-9 col-lg-8">
-        <GoogleMap @ref="@_map1" Id="map1" Options="@_mapOptions"></GoogleMap>
+        <div class="w-100 d-flex height-google-map">
+            <div id="googleMap" style="flex-basis: 100%"></div>
+        </div>
     </DashboardCard>
 
     <DashboardCard Title="Google Maps marker" BootstrapSizing="col-xl-3 col-lg-4">
         <div>
-            <p>
-                <i class="fa-solid fa-location-dot"></i> The Netherlands                 
-            </p>
-            <hr>
             <p class="m-0">
-                <i class="fa-solid fa-temperature-half"></i> 26°C
+                <i class="fa-solid fa-temperature-half"></i> @Temperature °C
             </p>
             <p class="m-0">
-                <i class="fa-solid fa-location-crosshairs"></i> lat: 0.00
+                <i class="fa-solid fa-location-crosshairs"></i> lat: @Lattitude
             </p>
             <p class="m-0">
-                <i class="fa-solid fa-location-crosshairs"></i> lon: 0.00
+                <i class="fa-solid fa-location-crosshairs"></i> lon: @Longitude
             </p>
         </div>
     </DashboardCard>
 </div>
 
 @functions {
-    private GoogleMap _map1 = default!;
-    private MapOptions _mapOptions = default!;
+    
+    public double Lattitude {get; set;}
+    
+    public double Longitude {get; set;}
+
+    public double Temperature {get; set;}
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender) 
+        {
+            var dotNetHelper = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("initalizeMap", "googleMap");
+            await JS.InvokeVoidAsync("createMarker", "test", 51.94998550415039, 6.746642112731934, dotNetHelper, nameof(ShowMarkerInfo));
+            await JS.InvokeVoidAsync("createMarker", "Other location", 51.94998550415039, 7.746642112731934, dotNetHelper, nameof(ShowMarkerInfo));
+        }
+    }
+
+    [JSInvokable]
+    public void ShowMarkerInfo(double lat, double lon)
+    {
+        Lattitude = lat;
+        Longitude = lon;
+        Temperature = 38.5; // TODO: set this from the correct marker
+        StateHasChanged();
+    }
 }
