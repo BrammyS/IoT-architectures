@@ -8,10 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Scrutor" Version="4.2.2" />
-        <PackageReference Include="FluentValidation" Version="11.8.0" />
+        <PackageReference Include="Scrutor" Version="4.2.2"/>
+        <PackageReference Include="FluentValidation" Version="11.8.0"/>
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0"/>
         <PackageReference Include="Mediator.Abstractions" Version="2.1.7"/>
         <PackageReference Include="Mediator.SourceGenerator" Version="2.1.7">
             <PrivateAssets>all</PrivateAssets>
@@ -20,13 +20,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\IoT-Architectures.Api.Domain\IoT-Architectures.Api.Domain.csproj" />
-      <ProjectReference Include="..\IoT-Architectures.Client.Persistence.Mongodb\IoT-Architectures.Client.Persistence.Mongodb.csproj" />
+        <ProjectReference Include="..\IoT-Architectures.Api.Domain\IoT-Architectures.Api.Domain.csproj"/>
+        <ProjectReference Include="..\IoT-Architectures.Client.Persistence.Mongodb\IoT-Architectures.Client.Persistence.Mongodb.csproj"/>
     </ItemGroup>
 
 
     <ItemGroup>
-      <Folder Include="Common\" />
+        <Folder Include="Common\"/>
     </ItemGroup>
 
 </Project>

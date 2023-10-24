@@ -14,7 +14,7 @@ public static class DependencyInjection
         services.AddSingleton<MongoContext>();
         services.AddSingleton<IUnitOfWork, UnitOfWork>();
         services.AddSingleton<ITemperatureRecordRepository, TemperatureRecordRepository>();
-        
+
         services.Scan(
             scan => scan
                 .FromAssemblyOf<ICollectionConfigurator>()
@@ -22,7 +22,7 @@ public static class DependencyInjection
                 .AsImplementedInterfaces()
                 .WithTransientLifetime()
         );
-        
+
         return services;
     }
 }
