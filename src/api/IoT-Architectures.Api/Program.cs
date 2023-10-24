@@ -16,6 +16,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Enables the ability to read the raw body data in a api controller.
+app.Use(
+    (context, next) =>
+    {
+        context.Request.EnableBuffering();
+        return next();
+    }
+);
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
