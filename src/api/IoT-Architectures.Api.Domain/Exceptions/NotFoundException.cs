@@ -1,4 +1,4 @@
-﻿namespace GalleryPixels.Api.Domain.Exceptions;
+﻿namespace IoT_Architectures.Api.Domain.Exceptions;
 
 public class NotFoundException : Exception
 {

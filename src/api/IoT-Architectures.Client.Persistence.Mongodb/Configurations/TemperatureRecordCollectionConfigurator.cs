@@ -1,8 +1,5 @@
 ﻿using IoT_Architectures.Client.Persistence.Entities;
-using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Bson.Serialization.Serializers;
 
 namespace IoT_Architectures.Client.Persistence.Mongodb.Configurations;
 
@@ -25,4 +22,3 @@ public class TemperatureRecordCollectionConfigurator : ICollectionConfigurator
         );
     }
 }
-    
