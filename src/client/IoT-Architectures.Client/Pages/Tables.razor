@@ -1,7 +1,5 @@
 @page "/tables"
 @layout DashboardLayout
-@using GoogleMapsComponents
-@using GoogleMapsComponents.Maps
 
 <PageHeader Text="Tables" />
 
@@ -94,22 +92,3 @@
         </div>
     </DashboardCard>
 </div>
-
-@functions {
-    private GoogleMap _map1 = default!;
-    private MapOptions _mapOptions = default!;
-
-    protected override void OnInitialized()
-    {
-        _mapOptions = new MapOptions
-        {
-            Zoom = 8,
-            Center = new LatLngLiteral
-            {
-                Lat = 52.19189664972104,
-                Lng = 5.696305211056612
-            },
-            MapTypeId = MapTypeId.Roadmap
-        };
-    }
-}

@@ -1,22 +1,16 @@
-@page "/dashboard"
+@page "/"
 @layout DashboardLayout
-@using GoogleMapsComponents
-@using GoogleMapsComponents.Maps
+@inject IJSRuntime JS
 
 <PageHeader Text="Dashboard" />
 
-<!-- Content Row -->
 <div class="row">
     <DashboardCard Title="Temperature World Map" BootstrapSizing="col-xl-9 col-lg-8">
-        <GoogleMap @ref="@_map1" Id="map1" Options="@_mapOptions"></GoogleMap>
+        <div id="googleMap"></div>
     </DashboardCard>
 
     <DashboardCard Title="Google Maps marker" BootstrapSizing="col-xl-3 col-lg-4">
         <div>
-            <p>
-                <i class="fa-solid fa-location-dot"></i> The Netherlands                 
-            </p>
-            <hr>
             <p class="m-0">
                 <i class="fa-solid fa-temperature-half"></i> 26°C
             </p>
@@ -31,20 +25,10 @@
 </div>
 
 @functions {
-    private GoogleMap _map1 = default!;
-    private MapOptions _mapOptions = default!;
+    private object _map;
 
-    protected override void OnInitialized()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        _mapOptions = new MapOptions
-        {
-            Zoom = 8,
-            Center = new LatLngLiteral
-            {
-                Lat = 52.19189664972104,
-                Lng = 5.696305211056612
-            },
-            MapTypeId = MapTypeId.Roadmap
-        };
+        await JS.InvokeVoidAsync("initalizeMap");
     }
 }
