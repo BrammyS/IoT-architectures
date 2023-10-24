@@ -5,7 +5,6 @@
 
 <PageHeader Text="Dashboard" />
 
-
 <!-- Content Row -->
 <div class="row">
     <DashboardCard Title="Temperature World Map" BootstrapSizing="col-xl-9 col-lg-8">
@@ -34,4 +33,18 @@
 @functions {
     private GoogleMap _map1 = default!;
     private MapOptions _mapOptions = default!;
+
+    protected override void OnInitialized()
+    {
+        _mapOptions = new MapOptions
+        {
+            Zoom = 8,
+            Center = new LatLngLiteral
+            {
+                Lat = 52.19189664972104,
+                Lng = 5.696305211056612
+            },
+            MapTypeId = MapTypeId.Roadmap
+        };
+    }
 }

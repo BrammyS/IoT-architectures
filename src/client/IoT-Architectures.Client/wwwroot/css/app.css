@@ -1,6 +1,6 @@
 :root {
-    --primary: hsl(233, 7%, 70%);
-    --primary-gradient: linear-gradient(180deg, hsl(233, 7%, 60%) 0%, hsl(233, 7%, 70%) 30%, hsl(233, 7%, 75%) 61%);
+    --primary: hsl(171, 100%, 43%);
+    --primary-gradient: linear-gradient(180deg, hsl(171, 100%, 38%) 0%, hsl(171, 100%, 43%) 30%, hsl(171, 100%, 48%) 61%);
 }
 
 .bg-gradient-primary {
@@ -10,4 +10,24 @@
 
 .bg-primary {
     background-color: var(--primary) !important;
+}
+
+.max-table-height {
+    height: 500px;
+}
+
+.overflow-y {
+    overflow-y: scroll;
+}
+
+.w-5 {
+    width: 5%;
+}
+
+.w-15 {
+    width: 15%;
+}
+
+.w-40 {
+    width: 40%;
 }
