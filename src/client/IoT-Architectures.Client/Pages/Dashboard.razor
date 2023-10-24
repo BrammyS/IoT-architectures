@@ -6,7 +6,7 @@
 
 <div class="row">
     <DashboardCard Title="Temperature World Map" BootstrapSizing="col-xl-9 col-lg-8">
-        <div id="googleMap"></div>
+        <div id="googleMap" style="height: 500px; width: 500px;"></div>
     </DashboardCard>
 
     <DashboardCard Title="Google Maps marker" BootstrapSizing="col-xl-3 col-lg-4">
@@ -25,10 +25,14 @@
 </div>
 
 @functions {
-    private object _map;
+    private string _map;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JS.InvokeVoidAsync("initalizeMap");
+        if(firstRender) 
+        {
+            _map = await JS.InvokeAsync<string>("initalizeMap", "googleMap");
+            //await JS.InvokeVoidAsync("createMarker", _map, "test", 51.2, 6.1);
+        }
     }
 }
