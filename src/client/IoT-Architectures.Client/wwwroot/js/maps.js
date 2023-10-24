@@ -1,55 +1,44 @@
+let googleMap = null;
+
 // to the base of the flagpole.
 function initalizeMap(mapElementId) {
     const map = new google.maps.Map(document.getElementById("googleMap"), {
-      zoom: 8,
-      center: { lat: -33.9, lng: 151.2 },
+      zoom: 10,
+      center: { lat: 51.94998550415039, lng: 6.746642112731934 },
     });
   
-    console.log(map);
-    return stringify(map);
+    googleMap = map;
 }
 
-// function createMarker(map, title, lat, long) {
-//     console.log("test")
-//     const image = {
-//         url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-//         // This marker is 20 pixels wide by 32 pixels high.
-//         size: new google.maps.Size(20, 32),
-//         // The origin for this image is (0, 0).
-//         origin: new google.maps.Point(0, 0),
-//         // The anchor for this image is the base of the flagpole at (0, 32).
-//         anchor: new google.maps.Point(0, 32),
-//     };
+function createMarker(title, lat, long, dotNetHelper, showMakerInfoCallbackName) {
+    if(googleMap == null) {
+        console.error("The map is not initialized yet, call the initialize method first");
+        return;
+    }
 
-//     const shape = {
-//         coords: [1, 1, 1, 20, 18, 20, 18, 1],
-//         type: "poly",
-//     };
+    const map = googleMap;
+    const image = {
+        url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+        size: new google.maps.Size(32, 32),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(16, 32),
+    };
 
-//     new google.maps.Marker({
-//         position: {lat: lat, lng: long},
-//         map,
-//         icon: image,
-//         shape: shape,
-//         title: title,
-//         zIndex: 1,
-//     });
-// }
+    const shape = {
+        coords: [1, 1, 1, 20, 18, 20, 18, 1],
+        type: "poly",
+    };
 
-
-function stringify(obj) {
-    let cache = [];
-    let str = JSON.stringify(obj, function(key, value) {
-      if (typeof value === "object" && value !== null) {
-        if (cache.indexOf(value) !== -1) {
-          // Circular reference found, discard key
-          return;
-        }
-        // Store value in our collection
-        cache.push(value);
-      }
-      return value;
+    const marker = new google.maps.Marker({
+        position: {lat: lat, lng: long},
+        map,
+        icon: image,
+        shape: shape,
+        title: title,
+        zIndex: 1,
     });
-    cache = null; // reset the cache
-    return str;
-  }
+   
+    marker.addListener("click", () => {
+        dotNetHelper.invokeMethodAsync(showMakerInfoCallbackName, lat, long);
+    });
+}

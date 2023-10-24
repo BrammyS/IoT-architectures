@@ -6,33 +6,51 @@
 
 <div class="row">
     <DashboardCard Title="Temperature World Map" BootstrapSizing="col-xl-9 col-lg-8">
-        <div id="googleMap" style="height: 500px; width: 500px;"></div>
+        <div class="w-100 d-flex height-google-map">
+            <div id="googleMap" style="flex-basis: 100%"></div>
+        </div>
     </DashboardCard>
 
     <DashboardCard Title="Google Maps marker" BootstrapSizing="col-xl-3 col-lg-4">
         <div>
             <p class="m-0">
-                <i class="fa-solid fa-temperature-half"></i> 26°C
+                <i class="fa-solid fa-temperature-half"></i> @Temperature °C
             </p>
             <p class="m-0">
-                <i class="fa-solid fa-location-crosshairs"></i> lat: 0.00
+                <i class="fa-solid fa-location-crosshairs"></i> lat: @Lattitude
             </p>
             <p class="m-0">
-                <i class="fa-solid fa-location-crosshairs"></i> lon: 0.00
+                <i class="fa-solid fa-location-crosshairs"></i> lon: @Longitude
             </p>
         </div>
     </DashboardCard>
 </div>
 
 @functions {
-    private string _map;
+    
+    public double Lattitude {get; set;}
+    
+    public double Longitude {get; set;}
+
+    public double Temperature {get; set;}
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if(firstRender) 
         {
-            _map = await JS.InvokeAsync<string>("initalizeMap", "googleMap");
-            //await JS.InvokeVoidAsync("createMarker", _map, "test", 51.2, 6.1);
+            var dotNetHelper = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("initalizeMap", "googleMap");
+            await JS.InvokeVoidAsync("createMarker", "test", 51.94998550415039, 6.746642112731934, dotNetHelper, nameof(ShowMarkerInfo));
+            await JS.InvokeVoidAsync("createMarker", "Other location", 51.94998550415039, 7.746642112731934, dotNetHelper, nameof(ShowMarkerInfo));
         }
+    }
+
+    [JSInvokable]
+    public void ShowMarkerInfo(double lat, double lon)
+    {
+        Lattitude = lat;
+        Longitude = lon;
+        Temperature = 38.5; // TODO: set this from the correct marker
+        StateHasChanged();
     }
 }
