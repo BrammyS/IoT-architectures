@@ -1,6 +1,9 @@
 @page "/"
+@using IoT_Architectures.Client.Core.Rest.Endpoints
+@using IoT_Architectures.Client.Core.Rest.RestModels
 @layout DashboardLayout
 @inject IJSRuntime JS
+@inject TemperateRecordsRestClient TRC
 
 <PageHeader Text="Dashboard" />
 
@@ -27,7 +30,9 @@
 </div>
 
 @functions {
-    
+    private DotNetObjectReference<Dashboard>? _dotnetHelper;
+    private IEnumerable<GroupedTemperatureRecord> _markers = Enumerable.Empty<GroupedTemperatureRecord>();
+
     public double Latitude {get; set;}
     
     public double Longitude {get; set;}
@@ -38,11 +43,20 @@
     {
         if(firstRender) 
         {
-            var dotNetHelper = DotNetObjectReference.Create(this);
+            _dotnetHelper = DotNetObjectReference.Create(this);
             await JS.InvokeVoidAsync("initalizeMap", "googleMap");
-            await JS.InvokeVoidAsync("createMarker", "test", 51.94998550415039, 6.746642112731934, dotNetHelper, nameof(ShowMarkerInfo));
-            await JS.InvokeVoidAsync("createMarker", "Other location", 51.94998550415039, 7.746642112731934, dotNetHelper, nameof(ShowMarkerInfo));
+            _markers = await TRC.GetGroupedTemperatureRecordsAsync(DateTimeOffset.Now, 5);
+
+            foreach(var marker in _markers)
+            {
+                await AddMarker(marker.Latitude, marker.Longitude);
+            }
         }
+    }
+
+    private async Task AddMarker(double latitude, double longitude) 
+    {
+        await JS.InvokeVoidAsync("createMarker", $"{latitude}-{longitude}", latitude, longitude, _dotnetHelper, nameof(ShowMarkerInfo));
     }
 
     [JSInvokable]
@@ -50,7 +64,7 @@
     {
         Latitude = lat;
         Longitude = lon;
-        Temperature = 38.5; // TODO: set this from the correct marker
+        Temperature = _markers.Single(x => x.Latitude == lat && x.Longitude == lon).AverageTemperature;
         StateHasChanged();
     }
 }
