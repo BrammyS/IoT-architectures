@@ -1,4 +1,5 @@
-﻿using IoT_Architectures.Api.Core.Endpoints.Lora.Webhook;
+﻿using IoT_Architectures.Api.Core.Endpoints.Lora;
+using IoT_Architectures.Api.Core.Endpoints.Lora.Webhook;
 using IoT_Architectures.Api.Domain.Models;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
@@ -27,8 +28,14 @@ public class LoraController : ApiController
     /// <response code="200">Returned when the request was successful.</response>
     [HttpPost("webhook")]
     [AllowAnonymous]
-    public async Task<ActionResult> HandleWebhookRequest([FromBody] List<SenML> data)
+    public async Task<ActionResult> HandleWebhookRequest([FromBody] List<SenML> data, [FromHeader(Name = "things-message-token")] string token)
     {
+        if (Request.Body.CanSeek) Request.Body.Seek(0, SeekOrigin.Begin);
+        if (!await Mediator.Send(new VerifyLoraRequestCommand(Request.Body, token)).ConfigureAwait(false))
+        {
+            return Unauthorized("Failed to verify token");
+        }
+
         var command = new LoraWebhookCommand(data);
         await Mediator.Send(command).ConfigureAwait(false);
         return Ok();
