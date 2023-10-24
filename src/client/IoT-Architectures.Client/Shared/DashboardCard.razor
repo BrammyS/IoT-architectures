@@ -1,0 +1,33 @@
+<div class="@BootstrapSizing">
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-primary">
+            <h6 class="m-0 font-weight-bold text-light">@Title</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body bg-white">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@code {
+    /// <summary>
+    ///     The title that will be shown on the header.
+    /// </summary>
+    [Parameter]
+    public string Title { get; set; } = null!;
+
+    /// <summary>
+    ///     The sizing of bootstrap.
+    /// </summary>
+    [Parameter]
+    public string BootstrapSizing {get; set;} = "col-6";
+
+    /// <summary>
+    ///     The content of the card.
+    /// </summary>
+    [Parameter]
+	public RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,37 @@
+@page "/dashboard"
+@layout DashboardLayout
+@using GoogleMapsComponents
+@using GoogleMapsComponents.Maps
+
+<PageHeader Text="Dashboard" />
+
+
+<!-- Content Row -->
+<div class="row">
+    <DashboardCard Title="Temperature World Map" BootstrapSizing="col-xl-9 col-lg-8">
+        <GoogleMap @ref="@_map1" Id="map1" Options="@_mapOptions"></GoogleMap>
+    </DashboardCard>
+
+    <DashboardCard Title="Google Maps marker" BootstrapSizing="col-xl-3 col-lg-4">
+        <div>
+            <p>
+                <i class="fa-solid fa-location-dot"></i> The Netherlands                 
+            </p>
+            <hr>
+            <p class="m-0">
+                <i class="fa-solid fa-temperature-half"></i> 26°C
+            </p>
+            <p class="m-0">
+                <i class="fa-solid fa-location-crosshairs"></i> lat: 0.00
+            </p>
+            <p class="m-0">
+                <i class="fa-solid fa-location-crosshairs"></i> lon: 0.00
+            </p>
+        </div>
+    </DashboardCard>
+</div>
+
+@functions {
+    private GoogleMap _map1 = default!;
+    private MapOptions _mapOptions = default!;
+}
