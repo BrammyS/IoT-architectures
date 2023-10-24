@@ -1,5 +1,4 @@
 ﻿using Mediator;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IoT_Architectures.Api.Controllers;

@@ -1,6 +1,4 @@
-﻿using System.Text;
-using System.Text.Json;
-using IoT_Architectures.Api.Core.Endpoints.Lora.Webhook;
+﻿using IoT_Architectures.Api.Core.Endpoints.Lora.Webhook;
 using IoT_Architectures.Api.Domain.Models;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;

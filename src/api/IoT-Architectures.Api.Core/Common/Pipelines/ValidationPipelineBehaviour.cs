@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Mediator;
-using ValidationException = GalleryPixels.Api.Domain.Exceptions.ValidationException;
+using ValidationException = IoT_Architectures.Api.Domain.Exceptions.ValidationException;
 
 namespace IoT_Architectures.Api.Core.Common.Pipelines;
 

@@ -95,6 +95,13 @@ public class SenML
     [JsonPropertyName("vd")]
     public string? Data { get; set; }
 
-    public bool IsPack() => BaseName != null && BaseTime != null;
-    public bool IsRecord() => Name != null;
+    public bool IsPack()
+    {
+        return BaseName != null && BaseTime != null;
+    }
+
+    public bool IsRecord()
+    {
+        return Name != null;
+    }
 }

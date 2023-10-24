@@ -9,7 +9,7 @@ namespace IoT_Architectures.Client.Persistence.UnitOfWorks;
 public interface IUnitOfWork
 {
     /// <summary>
-    ///     The <see cref="ITemperatureRecordRepository" /> used to query the <see cref="TemperatureRecord"/> collection.
+    ///     The <see cref="ITemperatureRecordRepository" /> used to query the <see cref="TemperatureRecord" /> collection.
     /// </summary>
     ITemperatureRecordRepository TemperatureRecords { get; }
 }

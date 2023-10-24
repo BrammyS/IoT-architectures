@@ -10,7 +10,7 @@ public class UnitOfWork : IUnitOfWork
     {
         TemperatureRecords = temperatureRecords;
     }
-    
+
     /// <inheritdoc />
     public ITemperatureRecordRepository TemperatureRecords { get; }
 }
