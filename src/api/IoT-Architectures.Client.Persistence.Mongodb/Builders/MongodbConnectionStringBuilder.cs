@@ -19,7 +19,7 @@ public class MongodbConnectionStringBuilder
         _username = configuration.GetMongodbUsername();
         _password = configuration.GetMongodbPassword();
         _isAtlas = configuration.GetMongodbIsAtlas() ?? false;
-        
+
         return this;
     }
 
@@ -37,7 +37,7 @@ public class MongodbConnectionStringBuilder
         csBuilder.Append($"{_host}");
         if (!_isAtlas)
             csBuilder.Append(":27017");
-        
+
         csBuilder.Append("?retryWrites=true&w=majority&compressors=zlib,zstd&maxPoolSize=1024");
 
         return csBuilder.ToString();

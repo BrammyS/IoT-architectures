@@ -9,10 +9,18 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\IoT-Architectures.Client.Domain\IoT-Architectures.Client.Domain.csproj" />
+
+
+
     </ItemGroup>
+
+
+
 
 </Project>
