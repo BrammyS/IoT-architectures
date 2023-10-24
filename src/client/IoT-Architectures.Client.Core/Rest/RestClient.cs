@@ -16,7 +16,7 @@ public class RestClient : IRestClient
     {
         _logger = logger;
         _client = httpClientFactory.CreateClient();
-        _client.BaseAddress = new Uri("https://api.battleislands.io");
+        _client.BaseAddress = new Uri("https://release-webhook.brammys.com/");
     }
 
     /// <inheritdoc />

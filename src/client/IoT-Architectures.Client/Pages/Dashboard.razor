@@ -17,7 +17,7 @@
                 <i class="fa-solid fa-temperature-half"></i> @Temperature °C
             </p>
             <p class="m-0">
-                <i class="fa-solid fa-location-crosshairs"></i> lat: @Lattitude
+                <i class="fa-solid fa-location-crosshairs"></i> lat: @Latitude
             </p>
             <p class="m-0">
                 <i class="fa-solid fa-location-crosshairs"></i> lon: @Longitude
@@ -28,7 +28,7 @@
 
 @functions {
     
-    public double Lattitude {get; set;}
+    public double Latitude {get; set;}
     
     public double Longitude {get; set;}
 
@@ -48,7 +48,7 @@
     [JSInvokable]
     public void ShowMarkerInfo(double lat, double lon)
     {
-        Lattitude = lat;
+        Latitude = lat;
         Longitude = lon;
         Temperature = 38.5; // TODO: set this from the correct marker
         StateHasChanged();

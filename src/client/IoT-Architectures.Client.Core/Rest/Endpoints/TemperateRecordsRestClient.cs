@@ -13,7 +13,7 @@ public class TemperateRecordsRestClient
 
     public async Task<List<TemperatureRecord>> GetAllTemperatureRecordsAsync(CancellationToken ct = default)
     {
-        const string endpoint = "/TemperatureRecord";
+        const string endpoint = "/temperaturerecords";
         return await _restClient.GetAsync<List<TemperatureRecord>>(endpoint, ct: ct).ConfigureAwait(false);
     }
 
