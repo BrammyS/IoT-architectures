@@ -8,9 +8,6 @@ import socket, ubinascii
 from network import LoRa
 from time import sleep
 
-def __generate_random_number(max_value):
-    return __generate_random_number(0, max_value)
-
 def __generate_random_number(min_value, max_value):
     random_int = rng() & 0x7FFFFFFF  # Ensure it's a positive integer
     range_size = max_value - min_value + 1
@@ -32,7 +29,7 @@ def change_led(color):
 
 def __setup_lora_connection():
     lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
-    
+
     dev_eui = ubinascii.unhexlify(env.DEV_EUI)
     app_eui = ubinascii.unhexlify(env.APP_EUI)
     app_key = ubinascii.unhexlify(env.APP_KEY)
@@ -65,8 +62,12 @@ def create_lora_socket(debug=False):
     return s
 
 def update_status_led(was_last_lora_send_success, has_gps):
-    color = int("0x{}{}{}".format("ff" if was_last_lora_send_success and has_gps else "00", "ff" if was_last_lora_send_success else "00", "ff" if has_gps else "00"))
+    # White if both are true, green if only lora, blue if only gps, red if none
+    color = int("0x{}{}{}".format("7f" if was_last_lora_send_success and has_gps else "00", "7f" if was_last_lora_send_success else "00", "7f" if has_gps else "00"))
+    if not was_last_lora_send_success and not has_gps:
+        color = 0x7F0000
+
     change_led(color)
 
 def generate_random_temperature():
-    return int(STARTING_TEMPERATURE - (__generate_random_number(5) / 2))
+    return int(STARTING_TEMPERATURE - (__generate_random_number(0, 5) / 2))
