@@ -14,7 +14,12 @@ builder.Services.AddCors(
     {
         options.AddPolicy(
             name: corsPolicyName,
-            policy => { policy.WithOrigins(builder.Configuration["AllowedHosts"]?.Split(',') ?? new[] { "*" }); }
+            policy =>
+            {
+                policy.WithOrigins(builder.Configuration["AllowedHosts"]?.Split(',') ?? new[] { "*" })
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }
         );
     }
 );
