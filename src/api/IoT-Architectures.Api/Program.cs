@@ -10,18 +10,7 @@ builder.Services.AddSwaggerGen();
 
 var origins = builder.Configuration["AllowedHosts"]?.Split(',') ?? new[] { "*" };
 builder.Services.AddCors(
-    options =>
-    {
-        options.AddDefaultPolicy(
-            policy =>
-            {
-                policy.WithOrigins(origins)
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
-            }
-        );
-    }
+    options => { options.AddDefaultPolicy(policy => { policy.WithOrigins(origins).AllowAnyHeader().AllowAnyMethod(); }); }
 );
 
 var app = builder.Build();
