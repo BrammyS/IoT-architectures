@@ -8,7 +8,10 @@ public class TemperatureRecordCollectionConfigurator : ICollectionConfigurator
     /// <inheritdoc />
     public void ConfigureCollection()
     {
-        if (BsonClassMap.IsClassMapRegistered(typeof(TemperatureRecord))) return;
+        if (BsonClassMap.IsClassMapRegistered(typeof(TemperatureRecord)))
+        {
+            return;
+        }
 
         BsonClassMap.RegisterClassMap<TemperatureRecord>(
             cm =>

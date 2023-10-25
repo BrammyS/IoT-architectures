@@ -3,15 +3,15 @@ let googleMap = null;
 // to the base of the flagpole.
 function initalizeMap(mapElementId) {
     const map = new google.maps.Map(document.getElementById("googleMap"), {
-      zoom: 10,
-      center: { lat: 51.94998550415039, lng: 6.746642112731934 },
+        zoom: 10,
+        center: {lat: 51.94998550415039, lng: 6.746642112731934},
     });
-  
+
     googleMap = map;
 }
 
 function createMarker(title, lat, long, dotNetHelper, showMakerInfoCallbackName) {
-    if(googleMap == null) {
+    if (googleMap == null) {
         console.error("The map is not initialized yet, call the initialize method first");
         return;
     }
@@ -37,7 +37,7 @@ function createMarker(title, lat, long, dotNetHelper, showMakerInfoCallbackName)
         title: title,
         zIndex: 1,
     });
-   
+
     marker.addListener("click", () => {
         dotNetHelper.invokeMethodAsync(showMakerInfoCallbackName, lat, long);
     });

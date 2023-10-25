@@ -20,7 +20,10 @@ public class ValidationPipelineBehaviour<TRequest, TResponse> : IPipelineBehavio
         MessageHandlerDelegate<TRequest, TResponse> next
     )
     {
-        if (!_validators.Any()) return await next(request, cancellationToken).ConfigureAwait(false);
+        if (!_validators.Any())
+        {
+            return await next(request, cancellationToken).ConfigureAwait(false);
+        }
 
         var context = new ValidationContext<TRequest>(request);
         var validationResults = await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)))
@@ -28,7 +31,9 @@ public class ValidationPipelineBehaviour<TRequest, TResponse> : IPipelineBehavio
         var failures = validationResults.SelectMany(r => r.Errors).Where(f => f is not null).ToList();
 
         if (failures.Count != 0)
+        {
             throw new ValidationException(failures);
+        }
 
         return await next(request, cancellationToken).ConfigureAwait(false);
     }

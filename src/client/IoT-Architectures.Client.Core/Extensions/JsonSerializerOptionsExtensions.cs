@@ -5,7 +5,7 @@ namespace IoT_Architectures.Client.Core.Extensions;
 
 public static class JsonSerializerOptionsExtensions
 {
-    public static JsonSerializerOptions  RegisterJsonOptions(this JsonSerializerOptions options)
+    public static JsonSerializerOptions RegisterJsonOptions(this JsonSerializerOptions options)
     {
         options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;

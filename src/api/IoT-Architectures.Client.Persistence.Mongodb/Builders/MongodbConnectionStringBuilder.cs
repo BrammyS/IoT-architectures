@@ -25,18 +25,29 @@ public class MongodbConnectionStringBuilder
 
     public string Build()
     {
-        if (string.IsNullOrWhiteSpace(_host)) throw new ArgumentNullException(_host);
-        if (string.IsNullOrWhiteSpace(_database)) throw new ArgumentNullException(_database);
+        if (string.IsNullOrWhiteSpace(_host))
+        {
+            throw new ArgumentNullException(_host);
+        }
+
+        if (string.IsNullOrWhiteSpace(_database))
+        {
+            throw new ArgumentNullException(_database);
+        }
 
         var csBuilder = new StringBuilder();
         csBuilder.Append($"{(_isAtlas ? "mongodb+srv" : "mongodb")}://");
 
         if (!string.IsNullOrWhiteSpace(_username) && !string.IsNullOrWhiteSpace(_password))
+        {
             csBuilder.Append($"{_username}:{_password}@");
+        }
 
         csBuilder.Append($"{_host}");
         if (!_isAtlas)
+        {
             csBuilder.Append(":27017");
+        }
 
         csBuilder.Append("?retryWrites=true&w=majority&compressors=zlib,zstd&maxPoolSize=1024");
 

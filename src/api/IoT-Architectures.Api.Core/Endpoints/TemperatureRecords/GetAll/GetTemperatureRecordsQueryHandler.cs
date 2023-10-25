@@ -18,7 +18,10 @@ public class GetTemperatureRecordsQueryHandler : IRequestHandler<GetTemperatureR
 
     public async ValueTask<IEnumerable<TemperatureRecord>> Handle(GetTemperatureRecordsQuery request, CancellationToken cancellationToken)
     {
-        if (_logger.IsEnabled(LogLevel.Debug)) _logger.LogDebug("Loading all temperature records from database");
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug("Loading all temperature records from database");
+        }
 
         return await _unitOfWork.TemperatureRecords.GetAllAsync().ConfigureAwait(false);
     }

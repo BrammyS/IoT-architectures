@@ -30,7 +30,11 @@ public class LoraController : ApiController
     [AllowAnonymous]
     public async Task<ActionResult> HandleWebhookRequest([FromBody] List<SenML> data, [FromHeader(Name = "things-message-token")] string token)
     {
-        if (Request.Body.CanSeek) Request.Body.Seek(0, SeekOrigin.Begin);
+        if (Request.Body.CanSeek)
+        {
+            Request.Body.Seek(0, SeekOrigin.Begin);
+        }
+
         if (!await Mediator.Send(new VerifyLoraRequestCommand(Request.Body, token)).ConfigureAwait(false))
         {
             return Unauthorized("Failed to verify token");

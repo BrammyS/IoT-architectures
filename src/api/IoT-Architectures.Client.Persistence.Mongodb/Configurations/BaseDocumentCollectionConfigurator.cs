@@ -11,7 +11,10 @@ public class BaseDocumentCollectionConfigurator : ICollectionConfigurator
     /// <inheritdoc />
     public void ConfigureCollection()
     {
-        if (BsonClassMap.IsClassMapRegistered(typeof(BaseDocument))) return;
+        if (BsonClassMap.IsClassMapRegistered(typeof(BaseDocument)))
+        {
+            return;
+        }
 
         BsonClassMap.RegisterClassMap<BaseDocument>(
             cm =>

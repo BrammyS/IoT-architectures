@@ -50,7 +50,10 @@ public class Repository<T> : IRepository<T> where T : BaseDocument
     /// <inheritdoc />
     public Task AddAsync(T document)
     {
-        if (string.IsNullOrEmpty(document.BsonObjectId)) document.BsonObjectId = ObjectId.GenerateNewId().ToString()!;
+        if (string.IsNullOrEmpty(document.BsonObjectId))
+        {
+            document.BsonObjectId = ObjectId.GenerateNewId().ToString()!;
+        }
 
         return MongoCollection.InsertOneAsync(document);
     }
@@ -59,7 +62,9 @@ public class Repository<T> : IRepository<T> where T : BaseDocument
     public Task AddAsync(List<T> documents)
     {
         foreach (var document in documents.Where(document => string.IsNullOrEmpty(document.BsonObjectId)))
+        {
             document.BsonObjectId = ObjectId.GenerateNewId().ToString()!;
+        }
 
         return MongoCollection.InsertManyAsync(documents);
     }

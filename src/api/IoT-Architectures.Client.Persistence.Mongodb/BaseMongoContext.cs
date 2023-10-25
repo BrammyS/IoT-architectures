@@ -12,7 +12,9 @@ public class BaseMongoContext
     protected BaseMongoContext(IEnumerable<ICollectionConfigurator> collectionConfigurators)
     {
         foreach (var collectionConfigurator in collectionConfigurators)
+        {
             collectionConfigurator.ConfigureCollection();
+        }
 
         // Set up MongoDB conventions
         var pack = new ConventionPack

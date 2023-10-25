@@ -19,6 +19,7 @@ public class LoraWebhookCommandHandler : IRequestHandler<LoraWebhookCommand>
     public async ValueTask<Unit> Handle(LoraWebhookCommand request, CancellationToken cancellationToken)
     {
         if (_logger.IsEnabled(LogLevel.Debug))
+        {
             _logger.LogDebug(
                 "LoRa SenML data packet received: {Data}",
                 JsonSerializer.Serialize(
@@ -29,6 +30,7 @@ public class LoraWebhookCommandHandler : IRequestHandler<LoraWebhookCommand>
                     }
                 )
             );
+        }
 
         _logger.LogInformation(
             "Received a lora webhook request with {Count} data points, {PackCount} packs, {RecordCount} records",

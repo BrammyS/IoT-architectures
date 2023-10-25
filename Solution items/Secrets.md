@@ -19,7 +19,7 @@ dotnet user-secrets remove "KEY" --project "../src/api/IoT-Architectures.Api/IoT
 
 ### Keys
 
-| Key                |
-|--------------------|
-| Mongodb:Username   |
-| Mongodb:Password   |
+| Key              |
+|------------------|
+| Mongodb:Username |
+| Mongodb:Password |

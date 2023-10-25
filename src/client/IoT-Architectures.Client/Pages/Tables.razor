@@ -1,24 +1,24 @@
 @page "/tables"
-@using IoT_Architectures.Client.Core.Rest.Endpoints
 @using IoT_Architectures.Client.Domain.Models
+@using IoT_Architectures.Client.Core.Rest.Endpoints
 @layout DashboardLayout
 @inject TemperateRecordsRestClient TRC
 
-<PageHeader Text="Tables" />
+<PageHeader Text="Tables"/>
 
 <!-- Content Row -->
 <div class="row justify-content-center">
     <DashboardCard Title="Temperature World Map" BootstrapSizing="col-xl-12">
-    
+
         <div class="pr-3">
             <table class="table table-striped text-center">
                 <thead>
-                    <tr>
-                        <th scope="col" class="w-5">#</th>
-                        <th scope="col" class="w-40"><i class="fa-solid fa-location-crosshairs"></i> Latitude </th>
-                        <th scope="col" class="w-40"><i class="fa-solid fa-location-crosshairs"></i> Longitude</th>
-                        <th scope="col" class="w-15"><i class="fa-solid fa-temperature-half"></i> Temperature &#8451;</th>
-                    </tr>
+                <tr>
+                    <th scope="col" class="w-5">#</th>
+                    <th scope="col" class="w-40"><i class="fa-solid fa-location-crosshairs"></i> Latitude </th>
+                    <th scope="col" class="w-40"><i class="fa-solid fa-location-crosshairs"></i> Longitude</th>
+                    <th scope="col" class="w-15"><i class="fa-solid fa-temperature-half"></i> Temperature &#8451;</th>
+                </tr>
                 </thead>
             </table>
         </div>
@@ -34,7 +34,7 @@
                         <td class="w-15">@temperatureRecord.Temperature</td>
                     </tr>
                 }
-            </table>    
+            </table>
         </div>
     </DashboardCard>
 </div>
@@ -45,11 +45,12 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if(firstRender) 
+        if (firstRender)
         {
             var temperatureRecords = await TRC.GetAllTemperatureRecordsAsync();
             TemperatureRecords = temperatureRecords.OrderByDescending(x => x.Timestamp);
             StateHasChanged();
         }
     }
+
 }

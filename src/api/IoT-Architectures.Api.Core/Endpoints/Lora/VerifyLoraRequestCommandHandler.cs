@@ -20,16 +20,20 @@ public class VerifyLoraRequestCommandHandler : IRequestHandler<VerifyLoraRequest
     public async ValueTask<bool> Handle(VerifyLoraRequestCommand request, CancellationToken cancellationToken)
     {
         if (_logger.IsEnabled(LogLevel.Debug))
+        {
             _logger.LogDebug("Validating lora request, token: {Token}", request.Token);
-        
+        }
+
         var bodyString = await ReadRequestBodyAsync(request.RequestBody).ConfigureAwait(false);
         var hashBytes = SHA256.HashData(Encoding.UTF8.GetBytes(bodyString + _secret));
-        
+
         var token = Convert.ToHexString(hashBytes);
         var validateResult = token.Equals(request.Token, StringComparison.OrdinalIgnoreCase);
-        if(!validateResult)
+        if (!validateResult)
+        {
             _logger.LogWarning("Failed to validate lora request, token: {Token}, expected token: {ExpectedToken}", request.Token, token);
-            
+        }
+
         return validateResult;
     }
 

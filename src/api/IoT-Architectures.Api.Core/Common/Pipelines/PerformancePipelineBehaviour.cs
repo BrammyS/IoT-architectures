@@ -25,12 +25,14 @@ public class PerformancePipelineBehaviour<TRequest, TResponse> : IPipelineBehavi
         var elapsedTime = Stopwatch.GetElapsedTime(startTime);
 
         if (elapsedTime.TotalMilliseconds > 1500)
+        {
             _logger.LogWarning(
                 "IoT.Architectures.Api Long Running Request: {Name} ({ElapsedTime} milliseconds) {Request}",
                 typeof(TRequest).Name,
                 elapsedTime.TotalMilliseconds.ToString("F"),
                 request
             );
+        }
 
         return response;
     }

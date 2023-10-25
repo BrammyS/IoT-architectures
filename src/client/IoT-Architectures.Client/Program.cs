@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using IoT_Architectures.Client;
 using IoT_Architectures.Client.Core;
-using IoT_Architectures.Client.Core.Rest.Endpoints;
 using IoT_Architectures.Client.Core.Rest;
+using IoT_Architectures.Client.Core.Rest.Endpoints;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
