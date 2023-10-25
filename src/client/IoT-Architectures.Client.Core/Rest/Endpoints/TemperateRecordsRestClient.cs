@@ -1,4 +1,4 @@
-using IoT_Architectures.Client.Core.Rest.RestModels;
+using IoT_Architectures.Client.Domain.Models;
 
 namespace IoT_Architectures.Client.Core.Rest.Endpoints;
 
