@@ -142,9 +142,6 @@ public class RestClient : IRestClient
             throw new HttpRequestException(await response.Content.ReadAsStringAsync(ct).ConfigureAwait(false));
         }
 
-        Console.WriteLine(response.StatusCode);
-        Console.WriteLine(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-
         return await DeserializeResponseAsync<TEntity>(response, ct).ConfigureAwait(false);
     }
 
