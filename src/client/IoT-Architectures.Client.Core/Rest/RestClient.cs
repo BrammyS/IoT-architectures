@@ -7,9 +7,9 @@ namespace IoT_Architectures.Client.Core.Rest;
 
 public class RestClient : IRestClient
 {
+    private readonly HttpClient _client;
     private readonly ILogger<RestClient> _logger;
     private readonly JsonSerializerOptions _serializerOptions;
-    private readonly HttpClient _client;
 
     /// <summary>
     ///     Initializes a new instance of <see cref="RestClient" />.

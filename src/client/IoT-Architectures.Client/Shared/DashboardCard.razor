@@ -13,6 +13,7 @@
 </div>
 
 @code {
+
     /// <summary>
     ///     The title that will be shown on the header.
     /// </summary>
@@ -23,11 +24,12 @@
     ///     The sizing of bootstrap.
     /// </summary>
     [Parameter]
-    public string BootstrapSizing {get; set;} = "col-6";
+    public string BootstrapSizing { get; set; } = "col-6";
 
     /// <summary>
     ///     The content of the card.
     /// </summary>
     [Parameter]
-	public RenderFragment ChildContent { get; set; }
+    public RenderFragment ChildContent { get; set; }
+
 }

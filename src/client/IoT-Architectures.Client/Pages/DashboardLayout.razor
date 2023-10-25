@@ -20,8 +20,9 @@
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
             <a class="nav-link" href="/">
-            <i class="fa-solid fa-gauge-simple-high"></i>
-            <span>Dashboard</span></a>
+                <i class="fa-solid fa-gauge-simple-high"></i>
+                <span>Dashboard</span>
+            </a>
         </li>
 
         <!-- Divider -->
@@ -31,8 +32,9 @@
 
         <li class="nav-item active">
             <a class="nav-link" href="/tables">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Tables</span></a>
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Tables</span>
+            </a>
         </li>
 
         <!-- Divider -->
@@ -77,5 +79,5 @@
 </a>
 
 @code {
-    private int _currentYear = DateTime.Now.Year;
+    private readonly int _currentYear = DateTime.Now.Year;
 }

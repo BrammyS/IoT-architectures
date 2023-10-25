@@ -18,7 +18,7 @@ public static class DependencyInjection
         services.AddTransient<TemperateRecordsRestClient>();
 
         services.Configure<JsonSerializerOptions>(options => options.RegisterJsonOptions());
-        
+
         return services;
     }
 }
