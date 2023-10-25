@@ -1,4 +1,6 @@
-﻿using IoT_Architectures.Client.Core.Rest;
+﻿using System.Text.Json;
+using IoT_Architectures.Client.Core.Extensions;
+using IoT_Architectures.Client.Core.Rest;
 using IoT_Architectures.Client.Core.Rest.Endpoints;
 using IoT_Architectures.Client.Domain;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,8 @@ public static class DependencyInjection
         services.AddTransient<IRestClient, RestClient>();
         services.AddTransient<TemperateRecordsRestClient>();
 
+        services.Configure<JsonSerializerOptions>(options => options.RegisterJsonOptions());
+        
         return services;
     }
 }
