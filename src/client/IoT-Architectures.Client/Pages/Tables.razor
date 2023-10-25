@@ -1,5 +1,8 @@
 @page "/tables"
+@using IoT_Architectures.Client.Core.Rest.Endpoints
+@using IoT_Architectures.Client.Core.Rest.RestModels
 @layout DashboardLayout
+@inject TemperateRecordsRestClient TRC
 
 <PageHeader Text="Tables" />
 
@@ -12,7 +15,7 @@
                 <thead>
                     <tr>
                         <th scope="col" class="w-5">#</th>
-                        <th scope="col" class="w-40"><i class="fa-solid fa-location-crosshairs"></i> Lattitude</th>
+                        <th scope="col" class="w-40"><i class="fa-solid fa-location-crosshairs"></i> Latitude </th>
                         <th scope="col" class="w-40"><i class="fa-solid fa-location-crosshairs"></i> Longitude</th>
                         <th scope="col" class="w-15"><i class="fa-solid fa-temperature-half"></i> Temperature &#8451;</th>
                     </tr>
@@ -22,73 +25,30 @@
 
         <div class="overflow-y max-table-height">
             <table class="table table-striped text-center">
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                        <td class="w-40">48.137154</td>
-                        <td class="w-40">11.576124</td>
-                        <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="w-5">1</th>
-                    <td class="w-40">48.137154</td>
-                    <td class="w-40">11.576124</td>
-                    <td class="w-15">45</td>
-                </tr>
+                @foreach (var (temperatureRecord, index) in TemperatureRecords.Select((x, i) => (x, i)))
+                {
+                    <tr>
+                        <th scope="row" class="w-5">@(index + 1)</th>
+                        <td class="w-40">@temperatureRecord.Latitude</td>
+                        <td class="w-40">@temperatureRecord.Longitude</td>
+                        <td class="w-15">@temperatureRecord.Temperature</td>
+                    </tr>
+                }
             </table>    
         </div>
     </DashboardCard>
 </div>
+
+@functions {
+
+    public IEnumerable<TemperatureRecord> TemperatureRecords { get; set; } = Enumerable.Empty<TemperatureRecord>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender) 
+        {
+            TemperatureRecords = await TRC.GetAllTemperatureRecordsAsync();
+            StateHasChanged();
+        }
+    }
+}
