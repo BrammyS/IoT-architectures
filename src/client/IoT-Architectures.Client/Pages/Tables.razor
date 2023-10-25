@@ -47,7 +47,8 @@
     {
         if(firstRender) 
         {
-            TemperatureRecords = await TRC.GetAllTemperatureRecordsAsync();
+            var temperatureRecords = await TRC.GetAllTemperatureRecordsAsync();
+            TemperatureRecords = temperatureRecords.OrderByDescending(x => x.Timestamp);
             StateHasChanged();
         }
     }
