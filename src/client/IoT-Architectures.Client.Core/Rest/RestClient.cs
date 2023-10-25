@@ -1,22 +1,25 @@
 using System.Data;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace IoT_Architectures.Client.Core.Rest;
 
 public class RestClient : IRestClient
 {
     private readonly ILogger<RestClient> _logger;
+    private readonly JsonSerializerOptions _serializerOptions;
     private readonly HttpClient _client;
 
     /// <summary>
     ///     Initializes a new instance of <see cref="RestClient" />.
     /// </summary>
-    public RestClient(ILogger<RestClient> logger, IHttpClientFactory httpClientFactory)
+    public RestClient(ILogger<RestClient> logger, IHttpClientFactory httpClientFactory, IOptions<JsonSerializerOptions> serializerOptions)
     {
         _logger = logger;
+        _serializerOptions = serializerOptions.Value;
         _client = httpClientFactory.CreateClient();
-        _client.BaseAddress = new Uri("https://api.battleislands.io");
+        _client.BaseAddress = new Uri("https://release-webhook.brammys.com/");
     }
 
     /// <inheritdoc />
@@ -139,6 +142,9 @@ public class RestClient : IRestClient
             throw new HttpRequestException(await response.Content.ReadAsStringAsync(ct).ConfigureAwait(false));
         }
 
+        Console.WriteLine(response.StatusCode);
+        Console.WriteLine(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+
         return await DeserializeResponseAsync<TEntity>(response, ct).ConfigureAwait(false);
     }
 
@@ -156,7 +162,12 @@ public class RestClient : IRestClient
     {
         if (response.IsSuccessStatusCode)
         {
-            return JsonSerializer.Deserialize<TEntity>(await response.Content.ReadAsStringAsync(ct).ConfigureAwait(false))!;
+            return (await JsonSerializer.DeserializeAsync<TEntity>(
+                    await response.Content.ReadAsStreamAsync(ct).ConfigureAwait(false),
+                    _serializerOptions,
+                    ct
+                )
+                .ConfigureAwait(false))!;
         }
 
         if (response.Content.Headers.ContentLength <= 0)
