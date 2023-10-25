@@ -19,7 +19,7 @@ public class TemperateRecordsRestClient
 
     public async Task<List<GroupedTemperatureRecord>> GetGroupedTemperatureRecordsAsync(DateTimeOffset date, int hours)
     {
-        var endpoint = $"/TemperatureRecord/grouped?date={date.ToUniversalTime():yyyy-MM-ddTHH:mm:ss.fffZ}&hours={hours}";
+        var endpoint = $"/temperaturerecords/grouped?date={date.ToUniversalTime():yyyy-MM-ddTHH:mm:ss.fffZ}&hours={hours}";
         return await _restClient.GetAsync<List<GroupedTemperatureRecord>>(endpoint).ConfigureAwait(false);
     }
 }
