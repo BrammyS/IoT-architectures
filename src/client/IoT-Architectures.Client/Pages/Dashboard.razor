@@ -45,7 +45,7 @@
         {
             _dotnetHelper = DotNetObjectReference.Create(this);
             await JS.InvokeVoidAsync("initalizeMap", "googleMap");
-            _markers = await TRC.GetGroupedTemperatureRecordsAsync(DateTimeOffset.Now, 5);
+            _markers = await TRC.GetGroupedTemperatureRecordsAsync(DateTimeOffset.UtcNow.AddHours(-2.5), 5);
 
             foreach(var marker in _markers)
             {
