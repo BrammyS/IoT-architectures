@@ -8,17 +8,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-const string corsPolicyName = "CustomCors";
+var origins = builder.Configuration["AllowedHosts"]?.Split(',') ?? new[] { "*" };
 builder.Services.AddCors(
     options =>
     {
-        options.AddPolicy(
-            name: corsPolicyName,
+        options.AddDefaultPolicy(
             policy =>
             {
-                policy.WithOrigins(builder.Configuration["AllowedHosts"]?.Split(',') ?? new[] { "*" })
+                policy.WithOrigins(origins)
+                    .AllowAnyHeader()
                     .AllowAnyMethod()
-                    .AllowAnyHeader();
+                    .AllowCredentials();
             }
         );
     }
@@ -42,7 +42,10 @@ app.Use(
 );
 
 app.UseHttpsRedirection();
-app.UseCors(corsPolicyName);
+app.UseStaticFiles();
+app.UseRouting();
+
+app.UseCors();
 
 app.UseAuthorization();
 app.MapControllers();
