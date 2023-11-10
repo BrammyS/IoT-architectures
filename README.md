@@ -68,7 +68,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Todo: Add description of the project
+A project to create a GPS tracker with a web-assbemly dashboard to see the temperature of specific GPS locations.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
