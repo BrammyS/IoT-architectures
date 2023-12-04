@@ -68,7 +68,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Todo: Add description of the project
+A project to create a GPS tracker with a web-assbemly dashboard to see the temperature of specific GPS locations.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -161,8 +161,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
 * [Readme template](https://github.com/othneildrew/Best-README-Template)
 * [Font Awesome](https://fontawesome.com)
